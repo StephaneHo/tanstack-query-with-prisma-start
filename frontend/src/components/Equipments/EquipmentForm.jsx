@@ -34,94 +34,117 @@ export default function EquipmentForm({ inputData, onSubmit, children }) {
           <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
             <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
               <div className="sm:flex sm:items-start">
-                <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                  <svg
-                    className="h-6 w-6 text-red-600"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
-                    />
-                  </svg>
-                </div>
-                <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                <div className="mt-1 text-center sm:ml-4 sm:mt-0 sm:text-left">
                   <form id="event-form" onSubmit={handleSubmit}>
-                    <div className="space-y-12">
-                      <div className="border-b border-gray-900/10 pb-12">
+                    <div className="space-y-6">
+                      <p className="control">
+                        <label
+                          htmlFor="title"
+                          className="block mb-2 text-sm font-medium text-gray-900"
+                        >
+                          Name
+                        </label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          defaultValue={inputData?.name ?? ""}
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5"
+                        />
+                      </p>
+
+                      {isPending && <p>Loading selectable images ...</p>}
+                      {isError && (
+                        <ErrorBlock
+                          title="Failed to load selectable images"
+                          message="Please try again"
+                        />
+                      )}
+                      {data && (
+                        <div className="control">
+                          <ImagePicker
+                            images={data}
+                            onSelect={handleSelectImage}
+                            selectedImage={selectedImage}
+                          />
+                        </div>
+                      )}
+
+                      <p className="control">
+                        <label
+                          htmlFor="description"
+                          className="block mb-2 text-sm font-medium text-gray-900"
+                        >
+                          Description
+                        </label>
+                        <textarea
+                          id="description"
+                          name="description"
+                          defaultValue={inputData?.description ?? ""}
+                          rows="3"
+                          className="block p-1.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                        />
+                      </p>
+
+                      <div className="controls-row">
                         <p className="control">
-                          <label htmlFor="title">Name</label>
+                          <label
+                            htmlFor="ref"
+                            className="block mb-2 text-sm font-medium text-gray-900"
+                          >
+                            Reference
+                          </label>
                           <input
                             type="text"
-                            id="name"
-                            name="name"
-                            defaultValue={inputData?.name ?? ""}
+                            id="ref"
+                            name="ref"
+                            defaultValue={inputData?.ref ?? ""}
+                            className="block p-1.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                           />
                         </p>
-
-                        {isPending && <p>Loading selectable images ...</p>}
-                        {isError && (
-                          <ErrorBlock
-                            title="Failed to load selectable images"
-                            message="Please try again"
-                          />
-                        )}
-                        {data && (
-                          <div className="control">
-                            <ImagePicker
-                              images={data}
-                              onSelect={handleSelectImage}
-                              selectedImage={selectedImage}
-                            />
-                          </div>
-                        )}
-
-                        <p className="control">
-                          <label htmlFor="description">Description</label>
-                          <textarea
-                            id="description"
-                            name="description"
-                            defaultValue={inputData?.description ?? ""}
-                          />
-                        </p>
-
-                        <div className="controls-row">
-                          <p className="control">
-                            <label htmlFor="date">Reference</label>
-                            <input
-                              type="text"
-                              id="ref"
-                              name="ref"
-                              defaultValue={inputData?.date ?? ""}
-                            />
-                          </p>
-                        </div>
-
-                        <p className="form-actions">{children}</p>
                       </div>
+
+                      <div className="controls-row">
+                        <p className="control">
+                          <label
+                            htmlFor="height"
+                            className="block mb-2 text-sm font-medium text-gray-900"
+                          >
+                            Hauteur
+                          </label>
+                          <input
+                            type="text"
+                            id="height"
+                            name="height"
+                            defaultValue={inputData?.height ?? ""}
+                            className="block p-1.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                          />
+                        </p>
+                      </div>
+
+                      <div className="controls-row">
+                        <p className="control">
+                          <label
+                            htmlFor="weight"
+                            className="block mb-2 text-sm font-medium text-gray-900"
+                          >
+                            Poids
+                          </label>
+                          <input
+                            type="text"
+                            id="weight"
+                            name="weight"
+                            defaultValue={inputData?.weight ?? ""}
+                            className="block p-1.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                          />
+                        </p>
+                      </div>
+
+                      <p className="form-actions">{children}</p>
                     </div>
                   </form>
                 </div>
               </div>
-            </div>
-            <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-              <button
-                type="button"
-                className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-              >
-                Deactivate
-              </button>
-              <button
-                type="button"
-                className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-              >
-                Cancel
-              </button>
             </div>
           </div>
         </div>

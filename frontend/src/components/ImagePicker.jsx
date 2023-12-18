@@ -1,7 +1,9 @@
 export default function ImagePicker({ images, selectedImage, onSelect }) {
   return (
     <div id="image-picker">
-      <p>Select an image</p>
+      <p className="block mb-2 text-sm font-medium text-gray-900 ">
+        Select an image
+      </p>
       <ul className="grid grid-cols-4 gap-4">
         {images.map((image) => (
           <li
