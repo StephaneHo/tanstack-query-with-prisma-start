@@ -21,42 +21,58 @@ app.use((req, res, next) => {
 });
 
 app.get("/equipments", async (req, res) => {
-  const equipments = await prisma.equipment.findMany();
+  const { max, search } = req.query;
+  let equipments = await prisma.equipment.findMany();
+  if (search && typeof search === "string") {
+    equipments = equipments.filter((equipment) => {
+      const searchableText = `${equipment.name} ${equipment.description}`;
+      return searchableText.toLowerCase().includes(search.toLowerCase());
+    });
+  }
+
+  if (max) {
+    equipments = equipments.slice(
+      equipments.length - Number(max),
+      equipments.length
+    );
+  }
   res.json(equipments);
 });
 
-/* app.post(`/signup`, async (req, res) => {
-  const { name, email, posts } = req.body;
-
-  const postData = posts?.map((post: Prisma.PostCreateInput) => {
-    return { title: post?.title, content: post?.content };
+app.get("/equipment/:id", async (req, res) => {
+  const { id } = req.params;
+  const equipment = await prisma.equipment.findUnique({
+    where: { id: Number(id) },
   });
+  res.json(equipment);
+});
 
-  const result = await prisma.user.create({
+app.post(`/equipments/new`, async (req, res) => {
+  console.log(req);
+
+  const { equipment } = req.body;
+
+  if (!equipment) {
+    return res.status(400).json({ message: "Event is required" });
+  }
+
+  const { name, description, ref } = equipment;
+
+  if (!equipment.name?.trim() || !equipment.ref?.trim()) {
+    return res.status(400).json({ message: "Invalid data provided." });
+  }
+
+  const result = await prisma.equipment.create({
     data: {
       name,
-      email,
-      posts: {
-        create: postData,
-      },
+      description,
+      ref,
     },
   });
   res.json(result);
 });
 
-app.post(`/post`, async (req, res) => {
-  const { title, content, authorEmail } = req.body;
-  const result = await prisma.post.create({
-    data: {
-      title,
-      content,
-      author: { connect: { email: authorEmail } },
-    },
-  });
-  res.json(result);
-});
-
-app.put("/post/:id/views", async (req, res) => {
+/* app.put("/post/:id/views", async (req, res) => {
   const { id } = req.params;
 
   try {

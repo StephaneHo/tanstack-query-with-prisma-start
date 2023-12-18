@@ -2,12 +2,12 @@ import LoadingIndicator from "../UI/LoadingIndicator.jsx";
 import ErrorBlock from "../UI/ErrorBlock.jsx";
 import EquipmentItem from "./EquipmentItem.jsx";
 import { useQuery } from "@tanstack/react-query";
-import { fetchEvents } from "../../util/http.js";
+import { fetchEquipments } from "../../util/http.js";
 
 export default function NewEventsSection() {
   const { data, isPending, isError, error } = useQuery({
     queryKey: ["equipments"],
-    queryFn: fetchEvents,
+    queryFn: fetchEquipments,
   });
 
   let content;
@@ -27,7 +27,7 @@ export default function NewEventsSection() {
 
   if (data) {
     content = (
-      <ul className="events-list">
+      <ul className="grid grid-cols-4 gap-4">
         {data.map((equipment) => (
           <li key={equipment.id}>
             <EquipmentItem equipment={equipment} />
@@ -38,7 +38,7 @@ export default function NewEventsSection() {
   }
 
   return (
-    <section className="content-section" id="new-events-section">
+    <section className="m-2" id="new-events-section">
       <header>
         <h2>Recently added events</h2>
       </header>

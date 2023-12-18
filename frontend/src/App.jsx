@@ -5,10 +5,11 @@ import {
 } from "react-router-dom";
 
 import Events from "./components/Equipments/Equipments.jsx";
-import EventDetails from "./components/Equipments/EquipmentDetails.jsx";
-import NewEvent from "./components/Equipments/NewEquipment.jsx";
-import EditEvent from "./components/Equipments/EditEquipment.jsx";
+import EquipmenttDetails from "./components/Equipments/EquipmentDetails.jsx";
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import EditEquipment from "./components/Equipments/EditEquipment.jsx";
+import NewEquipment from "./components/Equipments/NewEquipment.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,17 +23,17 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/equipments/new",
-        element: <NewEvent />,
+        element: <NewEquipment />,
       },
     ],
   },
   {
-    path: "/equipments/:id",
-    element: <EventDetails />,
+    path: "/equipment/:id",
+    element: <EquipmenttDetails />,
     children: [
       {
-        path: "/equipments/:id/edit",
-        element: <EditEvent />,
+        path: "/equipment/:id/edit",
+        element: <EditEquipment />,
       },
     ],
   },

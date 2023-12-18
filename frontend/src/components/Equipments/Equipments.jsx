@@ -7,11 +7,11 @@ import NewEventsSection from "./NewEquipmentsSection.jsx";
 
 export default function Events() {
   return (
-    <>
+    <div className="mx-20">
       <Outlet />
       <Header>
-        <Link to="/events/new" className="button">
-          New Event
+        <Link to="/equipments/new" className="button">
+          New Equipment
         </Link>
       </Header>
       <main>
@@ -19,6 +19,6 @@ export default function Events() {
         <NewEventsSection />
         <FindEventSection />
       </main>
-    </>
+    </div>
   );
 }

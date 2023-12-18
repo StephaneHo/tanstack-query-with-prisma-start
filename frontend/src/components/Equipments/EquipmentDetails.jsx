@@ -1,13 +1,13 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet } from "react-router-dom";
 
-import Header from '../Header.jsx';
+import Header from "../Header.jsx";
 
 export default function EventDetails() {
   return (
     <>
       <Outlet />
       <Header>
-        <Link to="/events" className="nav-item">
+        <Link to="/equipments" className="nav-item">
           View all Events
         </Link>
       </Header>

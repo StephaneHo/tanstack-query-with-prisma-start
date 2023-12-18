@@ -1,13 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import meetupImg from '../../assets/meetup.jpg';
+import BANNIERE from "../../assets/BANNIERE-WEEK-END-COUPLE-mention2.png";
 
 export default function EventsIntroSection() {
   return (
     <section
       className="content-section"
       id="overview-section"
-      style={{ backgroundImage: `url(${meetupImg})` }}
+      style={{ backgroundImage: `url(${BANNIERE})` }}
     >
       <h2>
         Connect with amazing people <br />
@@ -15,8 +15,8 @@ export default function EventsIntroSection() {
       </h2>
       <p>Anyone can organize and join events on React Event!</p>
       <p>
-        <Link to="/events/new" className="button">
-          Create your first event
+        <Link to="/equipments/new" className="button">
+          Create your first equipment
         </Link>
       </p>
     </section>

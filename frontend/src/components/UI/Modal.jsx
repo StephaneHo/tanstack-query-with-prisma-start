@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import { createPortal } from 'react-dom';
+import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 
 export default function Modal({ children, onClose }) {
   const dialog = useRef();
@@ -16,9 +16,16 @@ export default function Modal({ children, onClose }) {
   }, []);
 
   return createPortal(
-    <dialog className="modal" ref={dialog} onClose={onClose}>
+    <dialog
+      className="relative z-10"
+      aria-labelledby="modal-title"
+      role="dialog"
+      aria-modal="true"
+      ref={dialog}
+      onClose={onClose}
+    >
       {children}
     </dialog>,
-    document.getElementById('modal')
+    document.getElementById("modal")
   );
 }
