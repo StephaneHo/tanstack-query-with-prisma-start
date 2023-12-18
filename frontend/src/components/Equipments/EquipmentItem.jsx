@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function EquipmentItem({ equipment }) {
   return (
-    <div className="p-6 bg-white border border-black rounded-lg shadow hover:border-red-600 hover:border-4">
+    <div className="p-6 bg-white border border-black rounded-lg shadow hover:border-white hover:outline hover:outline-red-500">
       <div className="container max-w-screen-lg mx-auto pb-10">
         <img
           className="mx-auto"

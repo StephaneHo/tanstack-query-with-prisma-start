@@ -72,6 +72,12 @@ app.post(`/equipments/new`, async (req, res) => {
   res.json(result);
 });
 
+app.get("/equipments/images", async (req, res) => {
+  let images = await prisma.image.findMany();
+  console.log(images);
+  res.json({ images });
+});
+
 /* app.put("/post/:id/views", async (req, res) => {
   const { id } = req.params;
 

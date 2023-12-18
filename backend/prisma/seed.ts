@@ -15,6 +15,33 @@ const equipmentData: Prisma.EquipmentCreateInput[] = [
   },
 ];
 
+const imageData: Prisma.ImageCreateInput[] = [
+  {
+    name: "049-0041-Nacelle-autom-art-diesel-16m-h474.jpg",
+  },
+  {
+    name: "059-0070-main-bionique-ironhand-2-h474.jpg",
+  },
+  {
+    name: "1410-FS-450-F-sans-disque-1-h474.jpg",
+  },
+  {
+    name: "3410-ROXYFLAM-h474.jpg",
+  },
+  {
+    name: "0050066-LOX-HUSQVARNA-DR350T-D-h474.jpg",
+  },
+  {
+    name: "6829-ROBEND-3000-1-h474.jpg",
+  },
+  {
+    name: "0150009-LOX-HUSQVARNA-TS350E-D-h474.jpg",
+  },
+  {
+    name: "0330010-LOX-SDMO-VX200-D-h474.jpg",
+  },
+];
+
 async function main() {
   console.log(`Start seeding ...`);
   for (const u of equipmentData) {
@@ -22,6 +49,12 @@ async function main() {
       data: u,
     });
     console.log(`Created user with id: ${equipment.id}`);
+  }
+  for (const i of imageData) {
+    const image = await prisma.image.create({
+      data: i,
+    });
+    console.log(`Created image with id: ${image.id}`);
   }
   console.log(`Seeding finished.`);
 }

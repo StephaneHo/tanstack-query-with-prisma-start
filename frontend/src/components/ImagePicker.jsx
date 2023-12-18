@@ -2,15 +2,20 @@ export default function ImagePicker({ images, selectedImage, onSelect }) {
   return (
     <div id="image-picker">
       <p>Select an image</p>
-      <ul>
+      <ul className="grid grid-cols-4 gap-4">
         {images.map((image) => (
           <li
-            key={image.path}
-            onClick={() => onSelect(image.path)}
-            className={selectedImage === image.path ? 'selected' : undefined}
+            key={image.name}
+            onClick={() => onSelect(image.name)}
+            className={`${
+              selectedImage === image.name
+                ? "outline outline-offset-2 outline-red-500 "
+                : ""
+            }`}
           >
             <img
-              src={`http://localhost:3000/${image.path}`}
+              className="object-contain h-20 w-20"
+              src={`http://localhost:3000/${image.name}`}
               alt={image.caption}
             />
           </li>

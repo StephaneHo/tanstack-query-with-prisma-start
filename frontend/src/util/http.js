@@ -43,7 +43,7 @@ export async function createNewEquipment(equipmentData) {
 }
 
 export async function fetchSelectableImages({ signal }) {
-  const response = await fetch(`http://localhost:3000/events/images`, {
+  const response = await fetch(`http://localhost:3000/equipments/images`, {
     signal,
   });
 

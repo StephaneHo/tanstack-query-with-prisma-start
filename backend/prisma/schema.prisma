@@ -7,6 +7,12 @@ datasource db {
   url      = "file:./dev.db"
 }
 
+model Image {
+  id                Int     @id @default(autoincrement())
+  name              String
+  caption           String?
+}
+
 model Equipment {
   id                Int     @id @default(autoincrement())
   name              String
@@ -18,4 +24,5 @@ model Equipment {
   weight            Int?
   image             String?
 }
+
 
