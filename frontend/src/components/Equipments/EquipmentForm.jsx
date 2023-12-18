@@ -9,7 +9,7 @@ export default function EquipmentForm({ inputData, onSubmit, children }) {
   const [selectedImage, setSelectedImage] = useState(inputData?.image);
 
   const { data, isPending, isError } = useQuery({
-    queryKey: ["events-images"],
+    queryKey: ["equipments-images"],
     queryFn: fetchSelectableImages,
   });
 
@@ -23,7 +23,7 @@ export default function EquipmentForm({ inputData, onSubmit, children }) {
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-
+    console.log("selectedImage", selectedImage);
     onSubmit({ ...data, image: selectedImage });
   }
 
@@ -138,6 +138,56 @@ export default function EquipmentForm({ inputData, onSubmit, children }) {
                             className="block p-1.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                           />
                         </p>
+                      </div>
+
+                      <div className="controls-row">
+                        <p className="control">
+                          <label
+                            htmlFor="price"
+                            className="block mb-2 text-sm font-medium text-gray-900"
+                          >
+                            Prix
+                          </label>
+                          <input
+                            type="text"
+                            id="price"
+                            name="price"
+                            defaultValue={inputData?.price ?? ""}
+                            className="block p-1.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                          />
+                        </p>
+                      </div>
+
+                      <div className="flex items-center mb-4">
+                        <input
+                          id="default-radio-1"
+                          type="radio"
+                          value="false"
+                          name="default-radio"
+                          className="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-red-500"
+                        />
+                        <label
+                          htmlFor="default-radio-1"
+                          className="ms-2 text-sm font-medium text-gray-900"
+                        >
+                          Tout public
+                        </label>
+                      </div>
+                      <div className="flex items-center">
+                        <input
+                          checked
+                          id="default-radio-2"
+                          type="radio"
+                          value="true"
+                          name="default-radio"
+                          className="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-red-500"
+                        />
+                        <label
+                          htmlFor="default-radio-2"
+                          className="ms-2 text-sm font-medium text-gray-900"
+                        >
+                          Reserve aux professionels
+                        </label>
                       </div>
 
                       <p className="form-actions">{children}</p>

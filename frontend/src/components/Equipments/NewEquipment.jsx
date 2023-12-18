@@ -1,18 +1,23 @@
 import { Link, useNavigate } from "react-router-dom";
 
 import Modal from "../UI/Modal.jsx";
-import EventForm from "./EquipmentForm.jsx";
+import EquipmentForm from "./EquipmentForm.jsx";
 import { useMutation } from "@tanstack/react-query";
-import { createNewEquipment } from "../../util/http.js";
+import { createNewEquipment, queryClient } from "../../util/http.js";
 
 export default function NewEquipment() {
   const navigate = useNavigate();
 
   const { mutate } = useMutation({
     mutationFn: createNewEquipment,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["equipments"] });
+      navigate("/equipments");
+    },
   });
 
   function handleSubmit(formData) {
+    console.log(formData);
     mutate({
       equipment: formData,
     });
@@ -20,7 +25,7 @@ export default function NewEquipment() {
 
   return (
     <Modal onClose={() => navigate("../")}>
-      <EventForm onSubmit={handleSubmit}>
+      <EquipmentForm onSubmit={handleSubmit}>
         <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
           <Link
             to="../"
@@ -31,14 +36,11 @@ export default function NewEquipment() {
             {" "}
             Annuler
           </Link>
-          <button
-            type="button"
-            className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-          >
+          <button className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">
             Creer
           </button>
         </div>
-      </EventForm>
+      </EquipmentForm>
     </Modal>
   );
 }

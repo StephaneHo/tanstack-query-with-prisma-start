@@ -7,9 +7,10 @@ import {
 import Events from "./components/Equipments/Equipments.jsx";
 import EquipmenttDetails from "./components/Equipments/EquipmentDetails.jsx";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import EditEquipment from "./components/Equipments/EditEquipment.jsx";
 import NewEquipment from "./components/Equipments/NewEquipment.jsx";
+import { queryClient } from "./util/http.js";
 
 const router = createBrowserRouter([
   {
@@ -38,8 +39,6 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
-const queryClient = new QueryClient();
 
 function App() {
   return (

@@ -56,7 +56,16 @@ app.post(`/equipments/new`, async (req, res) => {
     return res.status(400).json({ message: "Event is required" });
   }
 
-  const { name, description, ref } = equipment;
+  const {
+    name,
+    description,
+    ref,
+    image,
+    price,
+    weight,
+    height,
+    isReservedPro,
+  } = equipment;
 
   if (!equipment.name?.trim() || !equipment.ref?.trim()) {
     return res.status(400).json({ message: "Invalid data provided." });
@@ -67,6 +76,11 @@ app.post(`/equipments/new`, async (req, res) => {
       name,
       description,
       ref,
+      image,
+      price,
+      weight,
+      height,
+      isReservedPro,
     },
   });
   res.json(result);
