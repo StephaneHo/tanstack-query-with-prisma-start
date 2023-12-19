@@ -27,7 +27,7 @@ export default function NewEventsSection() {
 
   if (data) {
     content = (
-      <ul className="grid grid-cols-4 gap-4">
+      <ul className="grid grid-cols-6 gap-4">
         {data.map((equipment) => (
           <li key={equipment.id}>
             <EquipmentItem equipment={equipment} />

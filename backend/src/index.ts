@@ -1,4 +1,5 @@
 import { Prisma, PrismaClient } from "@prisma/client";
+import { randomInt } from "crypto";
 import express from "express";
 
 const prisma = new PrismaClient();
@@ -77,9 +78,9 @@ app.post(`/equipments/new`, async (req, res) => {
       description,
       ref,
       image,
-      price,
-      weight,
-      height,
+      price: parseFloat(price),
+      weight: parseInt(weight),
+      height: parseInt(height),
       isReservedPro,
     },
   });

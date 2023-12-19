@@ -5,7 +5,7 @@ export default function EquipmentItem({ equipment }) {
     <div className="p-6 bg-white border border-black rounded-lg shadow hover:border-white hover:outline hover:outline-red-500">
       <div className="container max-w-screen-lg mx-auto pb-10">
         <img
-          className="mx-auto"
+          className="object-contain h-20 w-20"
           src={`http://localhost:3000/${equipment.image}`}
           alt={equipment.name}
         />
