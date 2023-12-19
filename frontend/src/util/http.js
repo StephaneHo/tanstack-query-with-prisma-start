@@ -10,7 +10,7 @@ export async function fetchEquipments({ signal, searchTerm }) {
   const response = await fetch(url, { signal });
 
   if (!response.ok) {
-    const error = new Error("An error occurred while fetching the events");
+    const error = new Error("An error occurred while fetching the equipments");
     error.code = response.status;
     error.info = await response.json();
     throw error;
@@ -31,15 +31,15 @@ export async function createNewEquipment(equipmentData) {
   });
 
   if (!response.ok) {
-    const error = new Error("An error occurred while creating the event");
+    const error = new Error("An error occurred while creating the equipment");
     error.code = response.status;
     error.info = await response.json();
     throw error;
   }
 
-  const { event } = await response.json();
+  const equipment = await response.json();
 
-  return event;
+  return equipment;
 }
 
 export async function fetchSelectableImages({ signal }) {
@@ -54,35 +54,35 @@ export async function fetchSelectableImages({ signal }) {
     throw error;
   }
 
-  const { images } = await response.json();
+  const images = await response.json();
 
   return images;
 }
 
-export async function fetchEvent({ id, signal }) {
-  const response = await fetch(`http://localhost:3000/events/${id}`, {
+export async function fetchEquipment({ id, signal }) {
+  const response = await fetch(`http://localhost:3000/equipment/${id}`, {
     signal,
   });
 
   if (!response.ok) {
-    const error = new Error("An error occurred while fetching the event");
+    const error = new Error("An error occurred while fetching the equipment");
     error.code = response.status;
     error.info = await response.json();
     throw error;
   }
 
-  const { event } = await response.json();
+  const equipment = await response.json();
 
-  return event;
+  return equipment;
 }
 
-export async function deleteEvent({ id }) {
-  const response = await fetch(`http://localhost:3000/events/${id}`, {
+export async function deleteEquipment({ id }) {
+  const response = await fetch(`http://localhost:3000/equipment/${id}`, {
     method: "DELETE",
   });
 
   if (!response.ok) {
-    const error = new Error("An error occurred while deleting the event");
+    const error = new Error("An error occurred while deleting the equipment");
     error.code = response.status;
     error.info = await response.json();
     throw error;
@@ -91,17 +91,17 @@ export async function deleteEvent({ id }) {
   return response.json();
 }
 
-export async function updateEvent({ id, event }) {
-  const response = await fetch(`http://localhost:3000/events/${id}`, {
+export async function updateEquipment({ id, equipment }) {
+  const response = await fetch(`http://localhost:3000/equipment/${id}`, {
     method: "PUT",
-    body: JSON.stringify({ event }),
+    body: JSON.stringify({ equipment }),
     headers: {
       "Content-Type": "application/json",
     },
   });
 
   if (!response.ok) {
-    const error = new Error("An error occurred while updating the event");
+    const error = new Error("An error occurred while updating the equipment");
     error.code = response.status;
     error.info = await response.json();
     throw error;

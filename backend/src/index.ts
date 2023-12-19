@@ -90,7 +90,17 @@ app.post(`/equipments/new`, async (req, res) => {
 app.get("/equipments/images", async (req, res) => {
   let images = await prisma.image.findMany();
   console.log(images);
-  res.json({ images });
+  res.json(images);
+});
+
+app.delete(`/equipment/:id`, async (req, res) => {
+  const { id } = req.params;
+  const post = await prisma.equipment.delete({
+    where: {
+      id: Number(id),
+    },
+  });
+  res.json(post);
 });
 
 /* app.put("/post/:id/views", async (req, res) => {
@@ -133,15 +143,7 @@ app.put("/publish/:id", async (req, res) => {
   }
 });
 
-app.delete(`/post/:id`, async (req, res) => {
-  const { id } = req.params;
-  const post = await prisma.post.delete({
-    where: {
-      id: Number(id),
-    },
-  });
-  res.json(post);
-});
+
 
 app.get("/user/:id/drafts", async (req, res) => {
   const { id } = req.params;

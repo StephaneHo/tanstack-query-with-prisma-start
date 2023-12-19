@@ -12,7 +12,7 @@ export default function FindEquipmentSection() {
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["equipments", { search: searchTerm }],
-    queryFn: ({ signal }) => fetchEquipments(signal, searchTerm),
+    queryFn: ({ signal }) => fetchEquipments({ signal, searchTerm }),
     enabled: searchTerm !== undefined,
   });
 
