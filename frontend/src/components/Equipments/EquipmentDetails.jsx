@@ -1,18 +1,54 @@
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
 
 import Header from "../Header.jsx";
-import { useQuery } from "@tanstack/react-query";
-import { fetchEquipment } from "../../util/http.js";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  deleteEquipment,
+  fetchEquipment,
+  queryClient,
+} from "../../util/http.js";
 import LoadingIndicator from "../UI/LoadingIndicator.jsx";
 import ErrorBlock from "../UI/ErrorBlock.jsx";
+import { useState } from "react";
+import Modal from "../UI/Modal.jsx";
 
 export default function EquipmentDetails() {
+  const [isDeleting, setIsDeleting] = useState(false);
+
   const params = useParams();
+  const navigate = useNavigate();
 
   const { data, isPending, isError, error } = useQuery({
     queryKey: ["equipment", params.id],
     queryFn: ({ signal }) => fetchEquipment({ signal, id: params.id }),
   });
+
+  const {
+    mutate,
+    isPending: isPendingDeletion,
+    isError: isErrorDeleting,
+    error: deleteError,
+  } = useMutation({
+    mutationFn: deleteEquipment,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["equipments"],
+      });
+      navigate("/equipments");
+    },
+  });
+
+  const handleStartDelete = () => {
+    setIsDeleting(true);
+  };
+
+  const handleStopDelete = () => {
+    setIsDeleting(false);
+  };
+
+  const handleDelete = () => {
+    mutate({ id: params.id });
+  };
 
   let content;
   if (isPending) {
@@ -32,8 +68,18 @@ export default function EquipmentDetails() {
         <header>
           <h1>{data.name}</h1>
           <nav>
-            <button>Delete</button>
-            <Link to="edit">Edit</Link>
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              onClick={handleStartDelete}
+            >
+              Delete
+            </button>
+            <Link
+              to="edit"
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Edit
+            </Link>
           </nav>
         </header>
         <div id="event-details-content" className="flex">
@@ -77,6 +123,37 @@ export default function EquipmentDetails() {
 
   return (
     <div className="mx-40">
+      {isDeleting && (
+        <Modal onClose={handleStopDelete}>
+          <h2>Are you sure ?</h2>
+          <p>Do you really want to delete this event ?</p>
+          <div>
+            {isPendingDeletion && <p>Deleting, please wait...</p>}
+            {!isPendingDeletion && (
+              <>
+                <button
+                  onClick={handleStopDelete}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleDelete}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                >
+                  Delete
+                </button>
+              </>
+            )}
+          </div>
+          {isErrorDeleting && (
+            <ErrorBlock
+              title="Failed to delete event"
+              message={deleteError.info?.message}
+            />
+          )}
+        </Modal>
+      )}
       <Outlet />
       <Header>
         <Link to="/equipments" className="nav-item">
