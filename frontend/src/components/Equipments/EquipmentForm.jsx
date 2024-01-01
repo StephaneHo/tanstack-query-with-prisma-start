@@ -23,7 +23,7 @@ export default function EquipmentForm({ inputData, onSubmit, children }) {
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    console.log("selectedImage", selectedImage);
+    console.log("formData", formData);
     onSubmit({ ...data, image: selectedImage });
   }
 
@@ -162,8 +162,8 @@ export default function EquipmentForm({ inputData, onSubmit, children }) {
                         <input
                           id="default-radio-1"
                           type="radio"
-                          value="false"
-                          name="default-radio"
+                          value={false}
+                          name="isReservedPro"
                           className="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-red-500"
                         />
                         <label
@@ -178,8 +178,8 @@ export default function EquipmentForm({ inputData, onSubmit, children }) {
                           checked
                           id="default-radio-2"
                           type="radio"
-                          value="true"
-                          name="default-radio"
+                          value={true}
+                          name="isReservedPro"
                           className="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 focus:ring-red-500"
                         />
                         <label

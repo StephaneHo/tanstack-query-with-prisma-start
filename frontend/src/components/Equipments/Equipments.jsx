@@ -1,24 +1,26 @@
 import { Link, Outlet } from "react-router-dom";
 
 import Header from "../Header.jsx";
-import EventsIntroSection from "./EquipmentsIntroSection.jsx";
-import FindEventSection from "./FindEquipmentSection.jsx";
-import NewEventsSection from "./NewEquipmentsSection.jsx";
 
-export default function Events() {
+import { EquipmentsIntroSection } from "./EquipmentsIntroSection";
+import { SearchEquipementsSection } from "./SearchEquipmentsSection.jsx";
+
+export const Equipments = () => {
   return (
     <div className="mx-20">
       <Outlet />
+
       <Header>
-        <Link to="/equipments/new" className="button">
-          New Equipment
-        </Link>
+        <div className="flex justify-between  mx-60">
+          <Link to="/equipments/new" className="button">
+            Nouvel Equipement
+          </Link>
+        </div>
       </Header>
       <main>
-        <EventsIntroSection />
-        <NewEventsSection />
-        <FindEventSection />
+        <EquipmentsIntroSection />
+        <SearchEquipementsSection />
       </main>
     </div>
   );
-}
+};

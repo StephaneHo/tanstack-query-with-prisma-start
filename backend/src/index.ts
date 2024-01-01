@@ -81,7 +81,7 @@ app.post(`/equipments/new`, async (req, res) => {
       price: parseFloat(price),
       weight: parseInt(weight),
       height: parseInt(height),
-      isReservedPro,
+      isReservedPro: "true" ? true : false,
     },
   });
   res.json(result);
@@ -101,6 +101,25 @@ app.delete(`/equipment/:id`, async (req, res) => {
     },
   });
   res.json(post);
+});
+
+app.put("/equipment/:id", async (req, res) => {
+  const { id } = req.params;
+  const { equipment } = req.body;
+
+  try {
+    const postData = await prisma.equipment.findUnique({
+      where: { id: Number(id) },
+    });
+
+    const updatedPost = await prisma.equipment.update({
+      where: { id: Number(id) || undefined },
+      data: equipment,
+    });
+    res.json(updatedPost);
+  } catch (error) {
+    res.json({ error: `Post with ID ${id} does not exist in the database` });
+  }
 });
 
 /* app.put("/post/:id/views", async (req, res) => {

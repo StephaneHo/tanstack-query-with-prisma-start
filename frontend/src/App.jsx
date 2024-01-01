@@ -4,13 +4,14 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 
-import Events from "./components/Equipments/Equipments.jsx";
+import { Equipments } from "./components/Equipments/Equipments.jsx";
 import EquipmenttDetails from "./components/Equipments/EquipmentDetails.jsx";
 
 import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./util/http.js";
+
 import EditEquipment from "./components/Equipments/EditEquipment.jsx";
 import NewEquipment from "./components/Equipments/NewEquipment.jsx";
-import { queryClient } from "./util/http.js";
 
 const router = createBrowserRouter([
   {
@@ -19,8 +20,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/equipments",
-    element: <Events />,
-
+    element: <Equipments />,
     children: [
       {
         path: "/equipments/new",
