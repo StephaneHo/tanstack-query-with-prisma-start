@@ -2,15 +2,21 @@ import { Link } from "react-router-dom";
 
 import BANNIERE from "../../assets/BANNIERE-WEEK-END-COUPLE-mention2.png";
 
-export const EquipmentsIntroSection = () => {
+export const EquipmentsCreateIntroSection = () => {
   return (
     <div className="">
       <img className="mx-auto object-contain h-80" src={BANNIERE} />
-      <p>
+      <div>
         <Link to="/equipments/new" className="button">
-          Create your first equipment
+          <button
+            className="my-10 inline-flex w-full justify-center
+            rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white
+            shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto "
+          >
+            Creer un equipement
+          </button>
         </Link>
-      </p>
+      </div>
     </div>
   );
 };

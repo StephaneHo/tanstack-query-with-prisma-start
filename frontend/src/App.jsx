@@ -5,13 +5,13 @@ import {
 } from "react-router-dom";
 
 import { Equipments } from "./components/Equipments/Equipments.jsx";
-import EquipmenttDetails from "./components/Equipments/EquipmentDetails.jsx";
 
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./util/http.js";
 
-import EditEquipment from "./components/Equipments/EditEquipment.jsx";
-import NewEquipment from "./components/Equipments/NewEquipment.jsx";
+import { NewEquipment } from "./components/Equipments/NewEquipment.jsx";
+import { EditEquipment } from "./components/Equipments/EditEquipment";
+import { EquipmentDetails } from "./components/Equipments/EquipmentDetails";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/equipment/:id",
-    element: <EquipmenttDetails />,
+    element: <EquipmentDetails />,
     children: [
       {
         path: "/equipment/:id/edit",

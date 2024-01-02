@@ -15,8 +15,7 @@ export const SearchEquipementsSection = () => {
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["equipments", { search: searchTerm }],
-    // queryFn: ({ signal }) => fetchEquipments({ signal, searchTerm }),
-    queryFn: fetchEquipments,
+    queryFn: ({ signal }) => fetchEquipments({ signal, searchTerm }),
   });
 
   let content;
@@ -49,7 +48,7 @@ export const SearchEquipementsSection = () => {
   return (
     <section className="m-2" id="new-events-section">
       <div className="flex my-10 justify-between">
-        <h2 className="text-4xl font-bold">Nos materiels</h2>
+        <h2 className="text-4xl font-bold">Nos materiels de location</h2>
         <form onSubmit={handleSubmit}>
           <div className="relative w-full">
             <input

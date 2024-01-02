@@ -12,7 +12,7 @@ import ErrorBlock from "../UI/ErrorBlock.jsx";
 import { useState } from "react";
 import Modal from "../UI/Modal.jsx";
 
-export default function EquipmentDetails() {
+export const EquipmentDetails = () => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const params = useParams();
@@ -64,21 +64,20 @@ export default function EquipmentDetails() {
   }
   if (data) {
     content = (
-      <>
+      <div className="my-10">
         <header>
-          <h1>{data.name}</h1>
           <nav>
             <button
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mx-4"
               onClick={handleStartDelete}
             >
-              Delete
+              Supprimer
             </button>
             <Link
               to="edit"
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
             >
-              Edit
+              Modifier
             </Link>
           </nav>
         </header>
@@ -117,7 +116,7 @@ export default function EquipmentDetails() {
             </ul>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 
@@ -155,12 +154,15 @@ export default function EquipmentDetails() {
         </Modal>
       )}
       <Outlet />
-      <Header>
-        <Link to="/equipments" className="nav-item">
-          View all Events
+      <Header className="my-10">
+        <Link
+          to="/equipments"
+          className="font-medium text-black hover:underline"
+        >
+          Retour a la page d accueil
         </Link>
       </Header>
       <article id="event-details">{content}</article>
     </div>
   );
-}
+};

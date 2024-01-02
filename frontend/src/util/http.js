@@ -2,12 +2,13 @@ import { QueryClient } from "@tanstack/react-query";
 
 export const queryClient = new QueryClient();
 
-export async function fetchEquipments(searchTerm) {
+export async function fetchEquipments({ signal, searchTerm }) {
+  console.log({ searchTerm });
   let url = "http://localhost:3000/equipments";
   if (searchTerm) {
     url += "?search=" + searchTerm;
   }
-  const response = await fetch(url);
+  const response = await fetch(url, { signal });
 
   if (!response.ok) {
     const error = new Error("An error occurred while fetching the equipments");

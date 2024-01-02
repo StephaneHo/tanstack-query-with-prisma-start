@@ -14,7 +14,6 @@ export default function EquipmentForm({ inputData, onSubmit, children }) {
   });
 
   function handleSelectImage(image) {
-    console.log(image);
     setSelectedImage(image);
   }
 
@@ -39,7 +38,7 @@ export default function EquipmentForm({ inputData, onSubmit, children }) {
                     <div className="space-y-6">
                       <p className="control">
                         <label
-                          htmlFor="title"
+                          htmlFor="name"
                           className="block mb-2 text-sm font-medium text-gray-900"
                         >
                           Name
@@ -175,7 +174,6 @@ export default function EquipmentForm({ inputData, onSubmit, children }) {
                       </div>
                       <div className="flex items-center">
                         <input
-                          checked
                           id="default-radio-2"
                           type="radio"
                           value={true}
@@ -190,7 +188,7 @@ export default function EquipmentForm({ inputData, onSubmit, children }) {
                         </label>
                       </div>
 
-                      <p className="form-actions">{children}</p>
+                      <div className="form-actions">{children}</div>
                     </div>
                   </form>
                 </div>

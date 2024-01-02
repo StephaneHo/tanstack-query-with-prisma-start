@@ -1,9 +1,9 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 import Header from "../Header.jsx";
 
-import { EquipmentsIntroSection } from "./EquipmentsIntroSection";
 import { SearchEquipementsSection } from "./SearchEquipmentsSection.jsx";
+import { EquipmentsCreateIntroSection } from "./EquipmentsIntroSection";
 
 export const Equipments = () => {
   return (
@@ -11,14 +11,10 @@ export const Equipments = () => {
       <Outlet />
 
       <Header>
-        <div className="flex justify-between  mx-60">
-          <Link to="/equipments/new" className="button">
-            Nouvel Equipement
-          </Link>
-        </div>
+        <div className="flex justify-between mx-60"></div>
       </Header>
       <main>
-        <EquipmentsIntroSection />
+        <EquipmentsCreateIntroSection />
         <SearchEquipementsSection />
       </main>
     </div>

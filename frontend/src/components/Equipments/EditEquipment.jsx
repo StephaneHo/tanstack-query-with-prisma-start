@@ -7,7 +7,7 @@ import { fetchEquipment, updateEquipment } from "../../util/http.js";
 import LoadingIndicator from "../UI/LoadingIndicator.jsx";
 import ErrorBlock from "../UI/ErrorBlock.jsx";
 
-export default function EditEquipment() {
+export const EditEquipment = () => {
   const navigate = useNavigate();
   const params = useParams();
 
@@ -66,4 +66,4 @@ export default function EditEquipment() {
   }
 
   return <Modal onClose={handleClose}>{content}</Modal>;
-}
+};
