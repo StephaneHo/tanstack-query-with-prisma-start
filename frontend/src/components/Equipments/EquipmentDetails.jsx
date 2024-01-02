@@ -9,12 +9,8 @@ import {
 } from "../../util/http.js";
 import LoadingIndicator from "../UI/LoadingIndicator.jsx";
 import ErrorBlock from "../UI/ErrorBlock.jsx";
-import { useState } from "react";
-import Modal from "../UI/Modal.jsx";
 
 export const EquipmentDetails = () => {
-  const [isDeleting, setIsDeleting] = useState(false);
-
   const params = useParams();
   const navigate = useNavigate();
 
@@ -23,12 +19,7 @@ export const EquipmentDetails = () => {
     queryFn: ({ signal }) => fetchEquipment({ signal, id: params.id }),
   });
 
-  const {
-    mutate,
-    isPending: isPendingDeletion,
-    isError: isErrorDeleting,
-    error: deleteError,
-  } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: deleteEquipment,
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -37,14 +28,6 @@ export const EquipmentDetails = () => {
       navigate("/equipments");
     },
   });
-
-  const handleStartDelete = () => {
-    setIsDeleting(true);
-  };
-
-  const handleStopDelete = () => {
-    setIsDeleting(false);
-  };
 
   const handleDelete = () => {
     mutate({ id: params.id });
@@ -69,7 +52,7 @@ export const EquipmentDetails = () => {
           <nav>
             <button
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mx-4"
-              onClick={handleStartDelete}
+              onClick={handleDelete}
             >
               Supprimer
             </button>
@@ -122,37 +105,6 @@ export const EquipmentDetails = () => {
 
   return (
     <div className="mx-40">
-      {isDeleting && (
-        <Modal onClose={handleStopDelete}>
-          <h2>Are you sure ?</h2>
-          <p>Do you really want to delete this event ?</p>
-          <div>
-            {isPendingDeletion && <p>Deleting, please wait...</p>}
-            {!isPendingDeletion && (
-              <>
-                <button
-                  onClick={handleStopDelete}
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleDelete}
-                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                >
-                  Delete
-                </button>
-              </>
-            )}
-          </div>
-          {isErrorDeleting && (
-            <ErrorBlock
-              title="Failed to delete event"
-              message={deleteError.info?.message}
-            />
-          )}
-        </Modal>
-      )}
       <Outlet />
       <Header className="my-10">
         <Link
