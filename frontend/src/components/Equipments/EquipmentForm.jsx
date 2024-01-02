@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import ErrorBlock from "../UI/ErrorBlock";
 import { fetchSelectableImages } from "../../util/http.js";
 
-export default function EquipmentForm({ inputData, onSubmit, children }) {
+export const EquipmentForm = ({ inputData, onSubmit, children }) => {
   const [selectedImage, setSelectedImage] = useState(inputData?.image);
 
   const { data, isPending, isError } = useQuery({
@@ -199,4 +199,4 @@ export default function EquipmentForm({ inputData, onSubmit, children }) {
       </div>
     </div>
   );
-}
+};

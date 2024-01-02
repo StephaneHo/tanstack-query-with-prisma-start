@@ -81,6 +81,7 @@ export const EquipmentDetails = () => {
             <div className="my-8">
               <p className="text-sm font-bold">A PARTIR DE:</p>
               <h2 className="text-6xl font-bold">{data.price}</h2>
+              <p className="text-3xl font-bold">euros</p>
             </div>
 
             <ul className="mx-20">

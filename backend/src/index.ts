@@ -81,7 +81,7 @@ app.post(`/equipments/new`, async (req, res) => {
       price: parseFloat(price),
       weight: parseInt(weight),
       height: parseInt(height),
-      isReservedPro: "true" ? true : false,
+      isReservedPro: isReservedPro === "true" ? true : false,
     },
   });
   res.json(result);
@@ -107,14 +107,30 @@ app.put("/equipment/:id", async (req, res) => {
   const { id } = req.params;
   const { equipment } = req.body;
 
-  try {
-    const postData = await prisma.equipment.findUnique({
-      where: { id: Number(id) },
-    });
+  const {
+    name,
+    description,
+    ref,
+    image,
+    price,
+    weight,
+    height,
+    isReservedPro,
+  } = equipment;
 
+  try {
     const updatedPost = await prisma.equipment.update({
       where: { id: Number(id) || undefined },
-      data: equipment,
+      data: {
+        name,
+        description,
+        ref,
+        image,
+        price: parseFloat(price),
+        weight: parseInt(weight),
+        height: parseInt(height),
+        isReservedPro: isReservedPro === "true" ? true : false,
+      },
     });
     res.json(updatedPost);
   } catch (error) {
